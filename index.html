@@ -150,7 +150,8 @@
                 let unpaidCount = 0;
 
                 members.forEach(member => {
-                    const paymentRecord = filteredPayments.find(p => 
+                    // BUG FIX HERE: .slice().reverse() makes the system read from bottom-to-top so it gets the newest update!
+                    const paymentRecord = filteredPayments.slice().reverse().find(p => 
                         String(p.Name).trim() === String(member.Name).trim() && 
                         String(p.Designation).trim() === String(member.Designation).trim()
                     );
