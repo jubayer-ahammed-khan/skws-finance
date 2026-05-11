@@ -7,196 +7,189 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style> 
-        body { 
-            font-family: 'Hind Siliguri', sans-serif; 
-            background-color: #0f172a; 
-            background-image: radial-gradient(circle at top right, #1e293b, #0f172a);
-            color: #f8fafc;
-        } 
-        .glass { 
-            background: rgba(255, 255, 255, 0.03); 
-            backdrop-filter: blur(12px); 
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08); 
-        }
-        .glass-header {
-            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-top: 4px solid #3b82f6;
-        }
+        body { font-family: 'Hind Siliguri', sans-serif; background-color: #0f172a; background-image: radial-gradient(circle at top right, #1e293b, #0f172a); color: #f8fafc; } 
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .glass-header { background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); border-top: 4px solid #3b82f6; }
+        .input-glass { background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); color: white; }
+        .input-glass:focus { border-color: #3b82f6; outline: none; box-shadow: 0 0 0 1px #3b82f6; }
         select option { background-color: #1e293b; color: #fff; }
+        ::-webkit-calendar-picker-indicator { filter: invert(1); }
     </style>
 </head>
 <body class="min-h-screen pb-12">
     <div class="max-w-4xl mx-auto p-4 mt-4 md:mt-6">
         
-        <div class="flex justify-end mb-4">
-            <a href="admin.html" class="inline-flex items-center gap-2 text-sm md:text-base font-bold text-blue-300 bg-blue-900/30 hover:bg-blue-800/60 border border-blue-500/30 transition duration-300 px-5 py-2 rounded-full shadow-[0_0_15px_rgba(59,130,246,0.15)] hover:shadow-[0_0_20px_rgba(59,130,246,0.4)] backdrop-blur-md group">
-                <span class="group-hover:scale-110 transition-transform">🔒</span> অ্যাডমিন প্যানেল
+        <div class="flex justify-between items-center mb-4">
+            <button onclick="openPaymentModal()" class="inline-flex items-center gap-2 text-sm md:text-base font-bold text-white bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 transition duration-300 px-6 py-2 rounded-full shadow-[0_0_15px_rgba(16,185,129,0.3)] transform hover:scale-105">
+                💸 পেমেন্ট সাবমিট
+            </button>
+            <a href="admin.html" class="inline-flex items-center gap-2 text-sm md:text-base font-bold text-blue-300 bg-blue-900/30 hover:bg-blue-800/60 border border-blue-500/30 transition duration-300 px-5 py-2 rounded-full backdrop-blur-md group">
+                <span class="group-hover:scale-110 transition-transform">🔒</span> অ্যাডমিন
             </a>
         </div>
 
         <div class="glass-header rounded-3xl shadow-2xl p-8 mb-8 text-center relative overflow-hidden">
-            <div class="absolute top-0 left-0 w-full h-full bg-blue-500/5 blur-[100px] -z-10"></div>
-            <h1 class="text-4xl md:text-5xl font-bold text-white mb-3 tracking-wide drop-shadow-md">সত্যের কাফেলা ওয়েলফেয়ার সোসাইটি</h1>
-            <span class="text-sm md:text-base text-blue-300 font-semibold bg-blue-900/40 border border-blue-500/30 inline-block px-5 py-1.5 rounded-full shadow-[0_0_15px_rgba(59,130,246,0.2)]">মাসিক চাঁদা ড্যাশবোর্ড</span>
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-3 tracking-wide">সত্যের কাফেলা ওয়েলফেয়ার সোসাইটি</h1>
+            <span class="text-sm md:text-base text-blue-300 font-semibold bg-blue-900/40 border border-blue-500/30 inline-block px-5 py-1.5 rounded-full">মাসিক চাঁদা ড্যাশবোর্ড</span>
         </div>
 
         <div class="glass rounded-2xl shadow-lg p-6 mb-8 flex flex-wrap gap-4 justify-center items-end">
             <div>
-                <label class="block text-sm font-semibold text-slate-300 mb-2">মাস নির্বাচন করুন</label>
-                <select id="monthFilter" class="bg-slate-800/50 border border-slate-600 rounded-xl px-4 py-2.5 w-40 text-white focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 transition cursor-pointer">
-                    <option value="January">জানুয়ারি</option><option value="February">ফেব্রুয়ারি</option>
-                    <option value="March">মার্চ</option><option value="April">এপ্রিল</option>
-                    <option value="May">মে</option><option value="June">জুন</option>
-                    <option value="July">জুলাই</option><option value="August">আগস্ট</option>
-                    <option value="September">সেপ্টেম্বর</option><option value="October">অক্টোবর</option>
-                    <option value="November">নভেম্বর</option><option value="December">ডিসেম্বর</option>
+                <label class="block text-sm font-semibold text-slate-300 mb-2">মাস</label>
+                <select id="monthFilter" class="input-glass rounded-xl px-4 py-2.5 w-40 transition cursor-pointer">
+                    <option value="January">জানুয়ারি</option><option value="February">ফেব্রুয়ারি</option><option value="March">মার্চ</option>
+                    <option value="April">এপ্রিল</option><option value="May">মে</option><option value="June">জুন</option>
+                    <option value="July">জুলাই</option><option value="August">আগস্ট</option><option value="September">সেপ্টেম্বর</option>
+                    <option value="October">অক্টোবর</option><option value="November">নভেম্বর</option><option value="December">ডিসেম্বর</option>
                 </select>
             </div>
-            <div>
-                <label class="block text-sm font-semibold text-slate-300 mb-2">Year</label>
-                <select id="yearFilter" class="bg-slate-800/50 border border-slate-600 rounded-xl px-4 py-2.5 w-32 text-white focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 transition cursor-pointer">
-                </select>
-            </div>
-            <button onclick="fetchData()" class="bg-blue-600 hover:bg-blue-500 text-white px-8 py-2.5 rounded-xl font-bold shadow-[0_0_15px_rgba(37,99,235,0.4)] transform transition duration-300 hover:-translate-y-1">
-                সার্চ করুন
-            </button>
+            <div><label class="block text-sm font-semibold text-slate-300 mb-2">Year</label><select id="yearFilter" class="input-glass rounded-xl px-4 py-2.5 w-32 transition cursor-pointer"></select></div>
+            <button onclick="fetchData()" class="bg-blue-600 hover:bg-blue-500 text-white px-8 py-2.5 rounded-xl font-bold transition duration-300 hover:-translate-y-1">সার্চ করুন</button>
         </div>
 
         <div id="summaryCards" class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 hidden">
-            <div class="glass rounded-2xl p-5 border-l-4 border-blue-500 flex items-center justify-between hover:bg-white/5 transition">
-                <div>
-                    <p class="text-slate-400 text-sm font-semibold mb-1">মোট সংগ্রহ (এই মাস)</p>
-                    <h3 id="totalAmountDisplay" class="text-2xl md:text-3xl font-bold text-blue-400">৳ ০</h3>
-                </div>
-                <div class="text-4xl opacity-80">💰</div>
-            </div>
-            <div class="glass rounded-2xl p-5 border-l-4 border-emerald-500 flex items-center justify-between hover:bg-white/5 transition">
-                <div>
-                    <p class="text-slate-400 text-sm font-semibold mb-1">পরিশোধ করেছেন</p>
-                    <h3 id="paidCountDisplay" class="text-2xl md:text-3xl font-bold text-emerald-400">০ জন</h3>
-                </div>
-                <div class="text-4xl opacity-80">✅</div>
-            </div>
-            <div class="glass rounded-2xl p-5 border-l-4 border-rose-500 flex items-center justify-between hover:bg-white/5 transition">
-                <div>
-                    <p class="text-slate-400 text-sm font-semibold mb-1">বকেয়া আছে</p>
-                    <h3 id="unpaidCountDisplay" class="text-2xl md:text-3xl font-bold text-rose-400">০ জন</h3>
-                </div>
-                <div class="text-4xl opacity-80">⏳</div>
-            </div>
+            <div class="glass rounded-2xl p-5 border-l-4 border-blue-500 flex items-center justify-between"><div class="text-left"><p class="text-slate-400 text-sm font-semibold mb-1">মোট সংগ্রহ</p><h3 id="totalAmountDisplay" class="text-2xl md:text-3xl font-bold text-blue-400">৳ ০</h3></div><div class="text-4xl opacity-80">💰</div></div>
+            <div class="glass rounded-2xl p-5 border-l-4 border-emerald-500 flex items-center justify-between"><div class="text-left"><p class="text-slate-400 text-sm font-semibold mb-1">পরিশোধ</p><h3 id="paidCountDisplay" class="text-2xl md:text-3xl font-bold text-emerald-400">০ জন</h3></div><div class="text-4xl opacity-80">✅</div></div>
+            <div class="glass rounded-2xl p-5 border-l-4 border-rose-500 flex items-center justify-between"><div class="text-left"><p class="text-slate-400 text-sm font-semibold mb-1">বকেয়া</p><h3 id="unpaidCountDisplay" class="text-2xl md:text-3xl font-bold text-rose-400">০ জন</h3></div><div class="text-4xl opacity-80">⏳</div></div>
         </div>
 
-        <div id="dataContainer" class="space-y-3">
-            <div class="glass rounded-2xl p-8 text-center text-slate-400 font-medium">
-                উপর থেকে মাস ও বছর সিলেক্ট করে 'সার্চ করুন' বাটনে ক্লিক করুন
-            </div>
+        <div id="dataContainer" class="space-y-3"><div class="glass rounded-2xl p-8 text-center text-slate-400 font-medium">উপর থেকে মাস ও বছর সিলেক্ট করে 'সার্চ করুন' বাটনে ক্লিক করুন</div></div>
+    </div>
+
+    <div id="paymentModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm hidden flex items-center justify-center p-4 z-50">
+        <div class="glass border-t-4 border-emerald-500 rounded-3xl p-6 md:p-8 w-full max-w-md relative overflow-y-auto max-h-[90vh]">
+            <button onclick="closePaymentModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl">✕</button>
+            <h2 class="text-2xl font-bold text-white mb-6">পেমেন্ট সাবমিট করুন</h2>
+            <form id="visitorPayForm" class="space-y-4 text-left">
+                <div><label class="text-sm font-semibold text-slate-300 block mb-1">সদস্যের নাম</label>
+                <select id="visitorName" required class="input-glass w-full p-2.5 rounded-xl cursor-pointer"><option value="">লোড হচ্ছে...</option></select></div>
+                <div class="flex gap-4">
+                    <div class="w-1/2"><label class="text-sm font-semibold text-slate-300 block mb-1">Month</label><select id="visitorMonth" class="input-glass w-full p-2.5 rounded-xl cursor-pointer"><option value="January">জানুয়ারি</option><option value="February">ফেব্রুয়ারি</option><option value="March">মার্চ</option><option value="April">এপ্রিল</option><option value="May">মে</option><option value="June">জুন</option><option value="July">জুলাই</option><option value="August">আগস্ট</option><option value="September">সেপ্টেম্বর</option><option value="October">অক্টোবর</option><option value="November">নভেম্বর</option><option value="December">ডিসেম্বর</option></select></div>
+                    <div class="w-1/2"><label class="text-sm font-semibold text-slate-300 block mb-1">Year</label><select id="visitorYear" class="input-glass w-full p-2.5 rounded-xl cursor-pointer"></select></div>
+                </div>
+                <div class="flex gap-4">
+                    <div class="w-1/2"><label class="text-sm font-semibold text-slate-300 block mb-1">Amount</label><input type="number" id="visitorAmount" placeholder="500" required class="input-glass w-full p-2.5 rounded-xl"></div>
+                    <div class="w-1/2"><label class="text-sm font-semibold text-slate-300 block mb-1">Date</label><input type="date" id="visitorDate" required class="input-glass w-full p-2.5 rounded-xl cursor-pointer"></div>
+                </div>
+                <div class="flex gap-4">
+                    <div class="w-1/2">
+                        <label class="text-sm font-semibold text-emerald-400 block mb-1">Payment Method</label>
+                        <select id="visitorMethod" required class="input-glass w-full p-2.5 rounded-xl border-emerald-500/50 cursor-pointer text-emerald-400 font-bold">
+                            <option value="bKash">bKash</option><option value="Nagad">Nagad</option>
+                            <option value="Rocket">Rocket</option><option value="Bank">Bank</option><option value="Cash">Cash</option>
+                        </select>
+                    </div>
+                    <div class="w-1/2">
+                        <label class="text-sm font-semibold text-emerald-400 block mb-1">Transaction ID</label>
+                        <input type="text" id="visitorTrxId" placeholder="e.g. 8KDF39D" class="input-glass w-full p-2.5 rounded-xl border-emerald-500/50">
+                    </div>
+                </div>
+                <button type="submit" id="paySubmitBtn" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl mt-4 transition">রিকোয়েস্ট পাঠান</button>
+                <p id="payMessage" class="text-center text-sm font-bold mt-2"></p>
+            </form>
         </div>
     </div>
 
     <script>
-        // ⚠️ আপনার API URL এখানে বসাতে ভুলবেন না
-        const API_URL = "https://script.google.com/macros/s/AKfycbwRgePnO2r60DaI9qwB1QDrBAS8yAwwihlF-4ibuo-cWvUBZqcAXQ7UUa6oCNhliuyB/exec";
+        const API_URL = "https://script.google.com/macros/s/AKfycbwNIOxGOVdV30KhyVhqyo41ZmySgYxy6nzv64BY0qo6jSHC0G7-iv1oyIMQPifxRFjG/exec"; // ⚠️ URL বসান 
 
         window.onload = () => {
             const currentYear = new Date().getFullYear();
-            const yearSelect = document.getElementById('yearFilter');
             const currentMonth = new Date().toLocaleString('en-US', { month: 'long' });
-            
             document.getElementById('monthFilter').value = currentMonth;
+            document.getElementById('visitorMonth').value = currentMonth;
+            document.getElementById('visitorDate').valueAsDate = new Date();
 
             for (let y = 2024; y <= currentYear + 10; y++) {
-                let option = document.createElement('option');
-                option.value = y;
-                option.text = y;
-                if (y === currentYear) option.selected = true;
-                yearSelect.appendChild(option);
+                document.getElementById('yearFilter').innerHTML += `<option value="${y}" ${y===currentYear?'selected':''}>${y}</option>`;
+                document.getElementById('visitorYear').innerHTML += `<option value="${y}" ${y===currentYear?'selected':''}>${y}</option>`;
             }
+            loadMembersForModal();
         };
 
-        async function fetchData() {
-            const month = document.getElementById('monthFilter').value;
-            const year = document.getElementById('yearFilter').value;
-            const container = document.getElementById('dataContainer');
-            const summaryCards = document.getElementById('summaryCards');
-            
-            summaryCards.classList.add('hidden');
-            
-            container.innerHTML = `
-                <div class="glass rounded-2xl p-8 text-center text-blue-400 font-bold animate-pulse flex flex-col items-center justify-center gap-3">
-                    <svg class="animate-spin h-8 w-8 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-                    ডেটা লোড হচ্ছে...
-                </div>`;
-
+        async function loadMembersForModal() {
             try {
                 const response = await fetch(API_URL);
                 const data = await response.json();
-                
+                const nameSelect = document.getElementById('visitorName');
+                nameSelect.innerHTML = '<option value="">আপনার নাম খুঁজুন...</option>';
+                data.members.forEach(m => { nameSelect.innerHTML += `<option value="${m.Name}|${m.Designation}">${m.Name} (${m.Designation})</option>`; });
+            } catch(e) {}
+        }
+
+        function openPaymentModal() { document.getElementById('paymentModal').classList.remove('hidden'); }
+        function closePaymentModal() { document.getElementById('paymentModal').classList.add('hidden'); document.getElementById('payMessage').innerText=''; }
+
+        document.getElementById('visitorPayForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('paySubmitBtn'); const msg = document.getElementById('payMessage');
+            btn.innerHTML = '⏳ রিকোয়েস্ট যাচ্ছে...'; btn.disabled = true;
+
+            const nameData = document.getElementById('visitorName').value.split('|');
+            const rowData = {
+                action: 'submit', date: document.getElementById('visitorDate').value,
+                name: nameData[0], designation: nameData[1],
+                month: document.getElementById('visitorMonth').value, year: document.getElementById('visitorYear').value,
+                amount: document.getElementById('visitorAmount').value, status: 'Pending',
+                trxId: document.getElementById('visitorTrxId').value,
+                paymentMethod: document.getElementById('visitorMethod').value // New Field Sent to API
+            };
+
+            try {
+                await fetch(API_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(rowData) });
+                msg.innerHTML = "✅ রিকোয়েস্ট অ্যাডমিনের কাছে পাঠানো হয়েছে!"; msg.className = "text-emerald-400 mt-2 text-center";
+                setTimeout(() => { closePaymentModal(); fetchData(); }, 2000);
+            } catch(e) { msg.innerHTML = "❌ সমস্যা হয়েছে!"; msg.className = "text-rose-400 mt-2"; }
+            btn.innerHTML = 'রিকোয়েস্ট পাঠান'; btn.disabled = false;
+        });
+
+        async function fetchData() {
+            const month = document.getElementById('monthFilter').value; const year = document.getElementById('yearFilter').value;
+            const container = document.getElementById('dataContainer');
+            document.getElementById('summaryCards').classList.add('hidden');
+            container.innerHTML = `<div class="glass rounded-2xl p-8 text-center text-blue-400 font-bold animate-pulse">ডেটা লোড হচ্ছে...</div>`;
+
+            try {
+                const response = await fetch(API_URL); const data = await response.json();
                 const members = data.members; 
-                const allPayments = data.payments;
-                const filteredPayments = allPayments.filter(row => row.Month === month && String(row.Year) === year);
-                
+                const filteredPayments = data.payments.filter(row => row.Month === month && String(row.Year) === year);
                 container.innerHTML = '';
                 
-                if(members.length === 0) {
-                    container.innerHTML = '<div class="glass rounded-2xl p-8 text-center text-red-400 font-bold border-red-500/20">⚠️ গুগল শিটে কোনো মেম্বার অ্যাড করা হয়নি!</div>';
-                    return;
-                }
-
-                let totalAmount = 0;
-                let paidCount = 0;
-                let unpaidCount = 0;
+                let totalAmount = 0, paidCount = 0, unpaidCount = 0;
 
                 members.forEach(member => {
-                    // BUG FIX HERE: .slice().reverse() makes the system read from bottom-to-top so it gets the newest update!
-                    const paymentRecord = filteredPayments.slice().reverse().find(p => 
-                        String(p.Name).trim() === String(member.Name).trim() && 
-                        String(p.Designation).trim() === String(member.Designation).trim()
-                    );
+                    const paymentRecord = filteredPayments.slice().reverse().find(p => String(p.Name).trim() === String(member.Name).trim() && String(p.Designation).trim() === String(member.Designation).trim());
+                    const status = paymentRecord ? paymentRecord.Status.toLowerCase() : 'unpaid';
                     
-                    const isPaid = paymentRecord && paymentRecord.Status.toLowerCase() === 'paid';
-                    
-                    if(isPaid) {
-                        paidCount++;
-                        totalAmount += Number(paymentRecord.Amount) || 0; 
+                    let statusBadge = '';
+                    if(status === 'paid') {
+                        paidCount++; totalAmount += Number(paymentRecord.Amount) || 0; 
+                        statusBadge = '<span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-4 py-1.5 rounded-full text-sm font-bold flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-400"></span>Paid</span>';
+                    } else if(status === 'pending') {
+                        unpaidCount++; 
+                        statusBadge = '<span class="bg-yellow-500/10 text-yellow-400 border border-yellow-500/30 px-4 py-1.5 rounded-full text-sm font-bold flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-yellow-400 animate-pulse"></span>Pending</span>';
                     } else {
                         unpaidCount++;
+                        statusBadge = '<span class="bg-rose-500/10 text-rose-400 border border-rose-500/30 px-4 py-1.5 rounded-full text-sm font-bold flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-rose-500"></span>Unpaid</span>';
                     }
-                    
-                    const statusBadge = isPaid
-                        ? '<span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-4 py-1.5 rounded-full text-sm font-bold shadow-[0_0_15px_rgba(16,185,129,0.15)] flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>Paid</span>'
-                        : '<span class="bg-rose-500/10 text-rose-400 border border-rose-500/30 px-4 py-1.5 rounded-full text-sm font-bold shadow-[0_0_15px_rgba(225,29,72,0.15)] flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-rose-500"></span>Unpaid</span>';
 
                     container.innerHTML += `
-                        <div class="glass rounded-2xl p-4 md:p-5 flex justify-between items-center hover:bg-white/5 transition duration-300 group">
+                        <div class="glass rounded-2xl p-4 md:p-5 flex justify-between items-center hover:bg-white/5 transition group">
                             <div class="flex items-center gap-4">
-                                <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-slate-800 border border-slate-600 flex items-center justify-center text-xl md:text-2xl shadow-inner group-hover:border-blue-500/50 transition">
-                                    👤
-                                </div>
+                                <div class="w-12 h-12 rounded-full bg-slate-800 border border-slate-600 flex items-center justify-center text-xl">👤</div>
                                 <div class="flex flex-col gap-1.5">
-                                    <h3 class="font-bold text-lg md:text-xl text-slate-100">${member.Name}</h3>
-                                    <div>
-                                        <span class="text-xs md:text-sm font-bold text-blue-100 bg-blue-600/40 px-3 py-1.5 rounded-lg border border-blue-400/40 backdrop-blur-sm tracking-wide inline-block">${member.Designation}</span>
-                                    </div>
+                                    <h3 class="font-bold text-lg text-slate-100">${member.Name}</h3>
+                                    <div><span class="text-xs font-bold text-blue-100 bg-blue-600/40 px-3 py-1 rounded-lg">${member.Designation}</span></div>
                                 </div>
                             </div>
-                            <div class="flex-shrink-0 ml-4">
-                                ${statusBadge}
-                            </div>
-                        </div>
-                    `;
+                            <div>${statusBadge}</div>
+                        </div>`;
                 });
-
                 document.getElementById('totalAmountDisplay').innerText = `৳ ${totalAmount.toLocaleString('en-IN')}`;
                 document.getElementById('paidCountDisplay').innerText = `${paidCount} জন`;
                 document.getElementById('unpaidCountDisplay').innerText = `${unpaidCount} জন`;
-                summaryCards.classList.remove('hidden');
-
-            } catch (error) {
-                container.innerHTML = '<div class="glass rounded-2xl p-8 text-center text-rose-400 font-bold">❌ ইন্টারনেট কানেকশন চেক করুন! ডেটা লোড হয়নি।</div>';
-            }
+                document.getElementById('summaryCards').classList.remove('hidden');
+            } catch (e) { container.innerHTML = '<div class="glass p-8 text-center text-rose-400 font-bold">❌ ইন্টারনেট চেক করুন!</div>'; }
         }
     </script>
 </body>
